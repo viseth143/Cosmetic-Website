@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+         Schema::create('payments', function (Blueprint $table) {
+        $table->id('payment_id');
+        $table->unsignedBigInteger('order_id')->nullable();
+        $table->unsignedBigInteger('payment_method_id')->nullable();
+        $table->string('payment_status', 50)->nullable();
+        $table->decimal('payment_amount', 10, 2)->nullable();
+        $table->timestamp('paid_at')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**

@@ -6,8 +6,8 @@
 
         <div class="flex justify-between items-center mb-10">
             <div>
-                <h1 class="text-4xl font-bold text-pink-500 mb-2">Add Product</h1>
-                <p class="text-gray-600">Add a new product to your store</p>
+                <h1 class="text-4xl font-bold text-pink-500 mb-2">Edit Product</h1>
+                <p class="text-gray-600">Update product details</p>
             </div>
             <a href="{{ route('admin.products') }}"
                 class="bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-xl font-semibold transition">
@@ -26,13 +26,15 @@
         @endif
 
         <div class="bg-white rounded-3xl shadow-lg p-10">
-            <form action="{{ route('admin.store-product') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.update-product', $product->product_id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 {{-- PRODUCT NAME --}}
                 <div class="mb-6">
                     <label class="block mb-2 font-semibold text-lg">Product Name</label>
-                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter product name"
+                    <input type="text" name="name" value="{{ old('name', $product->name) }}"
                         class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-pink-400">
                 </div>
 
@@ -45,7 +47,7 @@
                             <option value="">Select Brand</option>
                             @foreach($brands as $brand)
                             <option value="{{ $brand->brand_id }}"
-                                {{ old('brand_id') == $brand->brand_id ? 'selected' : '' }}>
+                                {{ $product->brand_id == $brand->brand_id ? 'selected' : '' }}>
                                 {{ $brand->brand_name }}
                             </option>
                             @endforeach
@@ -58,7 +60,7 @@
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->category_id }}"
-                                {{ old('category_id') == $category->category_id ? 'selected' : '' }}>
+                                {{ $product->category_id == $category->category_id ? 'selected' : '' }}>
                                 {{ $category->category_name }}
                             </option>
                             @endforeach
@@ -70,42 +72,48 @@
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block mb-2 font-semibold text-lg">Price ($)</label>
-                        <input type="number" name="price" value="{{ old('price') }}" placeholder="0.00" step="0.01"
+                        <input type="number" name="price" value="{{ old('price', $product->price) }}" step="0.01"
                             min="0"
                             class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-pink-400">
                     </div>
                     <div>
                         <label class="block mb-2 font-semibold text-lg">Stock Quantity</label>
-                        <input type="number" name="stock" value="{{ old('stock') }}" placeholder="0" min="0"
+                        <input type="number" name="stock" value="{{ old('stock', $product->stock) }}" min="0"
                             class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-pink-400">
                     </div>
                 </div>
 
-                {{-- IMAGE --}}
+                {{-- CURRENT IMAGE --}}
                 <div class="mb-6">
-                    <label class="block mb-2 font-semibold text-lg">Product Image</label>
+                    <label class="block mb-2 font-semibold text-lg">Current Image</label>
+                    @if($product->images->first())
+                    <img src="{{ asset($product->images->first()->image_url) }}"
+                        class="w-32 h-32 object-cover rounded-2xl mb-3">
+                    @else
+                    <p class="text-gray-400 text-sm mb-3">No image uploaded</p>
+                    @endif
+                    <label class="block mb-2 font-semibold text-base text-gray-600">Upload New Image (optional)</label>
                     <input type="file" name="image" accept="image/*"
                         class="w-full border border-gray-300 rounded-2xl px-5 py-4 bg-white">
-                    <p class="text-gray-400 text-sm mt-1">JPG, PNG, WEBP — max 2MB</p>
                 </div>
 
                 {{-- DESCRIPTION --}}
                 <div class="mb-8">
                     <label class="block mb-2 font-semibold text-lg">Description</label>
-                    <textarea name="description" rows="5" placeholder="Enter product description"
-                        class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-pink-400">{{ old('description') }}</textarea>
+                    <textarea name="description" rows="5"
+                        class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-pink-400">{{ old('description', $product->description) }}</textarea>
                 </div>
 
                 {{-- BUTTONS --}}
                 <div class="flex gap-4">
                     <button type="submit"
                         class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold transition">
-                        Save Product
+                        Update Product
                     </button>
-                    <button type="reset"
+                    <a href="{{ route('admin.products') }}"
                         class="bg-gray-200 hover:bg-gray-300 px-8 py-4 rounded-2xl text-lg font-semibold transition">
-                        Reset
-                    </button>
+                        Cancel
+                    </a>
                 </div>
             </form>
         </div>

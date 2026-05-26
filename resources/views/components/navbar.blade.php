@@ -10,9 +10,25 @@
             <li><a href="{{ route('about') }}" class="hover:text-pink-500">About</a></li>
             <li><a href="{{ route('contact') }}" class="hover:text-pink-500">Contact</a></li>
         </ul>
-        <div class="flex gap-6 font-medium">
-            <a href="{{ route('cart') }}" class="hover:text-pink-500"><i class="fa-solid fa-cart-shopping"></i></a>
-            <a href="{{ route('login') }}" class="hover:text-pink-500"><i class="fa-solid fa-user">   Login</i></a>
+        <div class="flex gap-6 font-medium items-center">
+            <a href="{{ route('cart') }}" class="hover:text-pink-500">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            @if(Session::get('customer_id') || Session::get('is_admin'))
+            <span class="text-pink-500 font-semibold">
+                👋 {{ Session::get('customer_name') ?? Session::get('admin_name') }}
+            </span>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="hover:text-pink-500 text-red-500 font-semibold">
+                    Logout
+                </button>
+            </form>
+            @else
+            <a href="{{ route('login') }}" class="hover:text-pink-500">
+                <i class="fa-solid fa-user"></i> Login
+            </a>
+            @endif
         </div>
     </div>
 </nav>
