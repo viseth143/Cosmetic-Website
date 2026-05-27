@@ -91,10 +91,12 @@
                     </div>
 
                     <!-- PLACE ORDER -->
-                    <button type="submit"
-                        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition">
+                    <a href="{{ route('payment') }}"
+                        class="block text-center w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold">
+
                         Place Order
-                    </button>
+
+                    </a>
                 </form>
             </div>
 

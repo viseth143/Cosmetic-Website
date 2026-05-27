@@ -1,54 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-white py-20">
+<section class="bg-white py-20">
 
-        <div class="container mx-auto px-6">
+    <div class="container mx-auto px-6">
 
-            <div class="text-center mb-16">
+        <div class="text-center mb-16">
 
-                <h1 class="text-5xl font-bold text-pink-500 mb-6">
-                    About Us
-                </h1>
+            <h1 class="text-5xl font-bold text-pink-500 mb-6">
+                About Us
+            </h1>
 
-                <p class="max-w-3xl mx-auto text-gray-600 text-lg">
-                    Learn more about GlowSkin and our skincare mission.
-                </p>
+            <p class="max-w-3xl mx-auto text-gray-600 text-lg">
+                Learn more about GlowSkin and our cosmetic mission.
+            </p>
 
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+            <div>
+                <img src="{{ asset('images/us.jpg') }}" alt="About Us"
+                    class="w-full h-[500px] object-cover rounded-2xl shadow-lg" />
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
 
-                <div>
-                    <img src="{{ asset('images/us.jpg') }}" alt="About Us"
-                        class="w-full h-[500px] object-cover rounded-2xl shadow-lg" />
-                </div>
+                <h2 class="text-3xl font-bold mb-6">
+                    Beauty and Confidence Every Day
+                </h2>
 
-                <div>
+                <p class="text-gray-600 leading-8 mb-5">
+                    At GlowSkin, we create premium cosmetic products designed
+                    to enhance your beauty and confidence every day.
+                </p>
 
-                    <h2 class="text-3xl font-bold mb-6">
-                        Healthy Skin, Happy Life
-                    </h2>
+                <p class="text-gray-600 leading-8 mb-5">
+                    Our team carefully selects high-quality ingredients to ensure
+                    safe, effective, and modern cosmetic solutions.
+                </p>
 
-                    <p class="text-gray-600 leading-8 mb-5">
-                        At GlowSkin, we create premium skincare products designed
-                        to nourish and protect your skin every day.
-                    </p>
-
-                    <p class="text-gray-600 leading-8 mb-5">
-                        Our team researches high-quality ingredients to ensure
-                        effective skincare solutions for modern lifestyles.
-                    </p>
-
-                    <p class="text-gray-600 leading-8">
-                        We believe confidence begins with healthy and glowing skin.
-                    </p>
-
-                </div>
+                <p class="text-gray-600 leading-8">
+                    We believe true beauty begins with self-care and confidence.
+                </p>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 @endsection
